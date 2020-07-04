@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+
+  <connectionStrings>
+    <add name="BloggingDatabase"
+         connectionString="Data Source=Mauro\\SQLEXPRESS; Initial Catalog=STG; Integrated Security=True; User Id=sa; Password=12345678" />
+  </connectionStrings>
+</configuration>

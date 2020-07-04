@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STG.UI", "STG.UI\STG.UI.csproj", "{45B24133-64EF-40E2-BE43-15591D1F9AE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STG.WebApi", "STG.WebApi\STG.WebApi.csproj", "{A4592D20-5739-4E44-B39B-49CA80AECED1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{45B24133-64EF-40E2-BE43-15591D1F9AE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45B24133-64EF-40E2-BE43-15591D1F9AE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45B24133-64EF-40E2-BE43-15591D1F9AE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45B24133-64EF-40E2-BE43-15591D1F9AE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4592D20-5739-4E44-B39B-49CA80AECED1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4592D20-5739-4E44-B39B-49CA80AECED1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4592D20-5739-4E44-B39B-49CA80AECED1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4592D20-5739-4E44-B39B-49CA80AECED1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C1942587-50CF-4D3F-B2A7-35E4448EAD4F}
+	EndGlobalSection
+EndGlobal
