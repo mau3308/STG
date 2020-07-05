@@ -1,7 +1,7 @@
-﻿namespace STG.WebApi.Models
+﻿namespace STG.DataAccess
 {
-    using System.Configuration;
     using Microsoft.EntityFrameworkCore;
+    using STG.Model;
 
     public partial class STGContext : DbContext
     {
@@ -19,7 +19,7 @@
         public virtual DbSet<CartasPorte> CartasPorte { get; set; }
         public virtual DbSet<DetalleServicioAdicional> DetalleServicioAdicional { get; set; }
         public virtual DbSet<Modulo> Modulo { get; set; }
-        public virtual DbSet<ModuloObjetoAccíon> ModuloObjetoAccíon { get; set; }
+        public virtual DbSet<ModuloObjetoAccion> ModuloObjetoAccion { get; set; }
         public virtual DbSet<Objeto> Objeto { get; set; }
         public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<Servicio> Servicio { get; set; }
@@ -30,7 +30,7 @@
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
-                optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["BloggingDatabase"].ConnectionString);
+                optionsBuilder.UseSqlServer("Data Source=Mauro\\SQLEXPRESS; Initial Catalog=STG; Integrated Security=True; User Id=sa; Password=12345678");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -38,9 +38,11 @@
             modelBuilder.Entity<Accion>(entity =>
             {
                 entity.HasKey(e => e.AccId)
-                    .HasName("PK__Accion__9A39F97C98CEFE8A");
+                    .HasName("PK__Accion__9A39F97CC0F02354");
 
-                entity.Property(e => e.AccId).HasColumnName("acc_Id");
+                entity.Property(e => e.AccId)
+                    .HasColumnName("acc_Id")
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.AccDescripcion)
                     .IsRequired()
@@ -52,9 +54,11 @@
             modelBuilder.Entity<Actividad>(entity =>
             {
                 entity.HasKey(e => e.ActId)
-                    .HasName("PK__Activida__EBC93CED266BE162");
+                    .HasName("PK__Activida__EBC93CEDAFB097A1");
 
-                entity.Property(e => e.ActId).HasColumnName("act_Id");
+                entity.Property(e => e.ActId)
+                    .HasColumnName("act_Id")
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.ActDescripcion)
                     .IsRequired()
@@ -66,7 +70,7 @@
             modelBuilder.Entity<CartasPorte>(entity =>
             {
                 entity.HasKey(e => e.CpoId)
-                    .HasName("PK__CartasPo__715E29970B323351");
+                    .HasName("PK__CartasPo__715E2997DEA47F93");
 
                 entity.Property(e => e.CpoId).HasColumnName("cpo_Id");
 
@@ -101,6 +105,8 @@
                 entity.Property(e => e.CpoKgDescargados).HasColumnName("cpo_KgDescargados");
 
                 entity.Property(e => e.CpoKgProcedencia).HasColumnName("cpo_KgProcedencia");
+
+                entity.Property(e => e.CpoNro).HasColumnName("cpo_Nro");
 
                 entity.Property(e => e.CpoPatenteTransporte)
                     .IsRequired()
@@ -150,7 +156,7 @@
             modelBuilder.Entity<DetalleServicioAdicional>(entity =>
             {
                 entity.HasKey(e => e.DsaId)
-                    .HasName("PK__DetalleS__2C16EB8E4CA6B29C");
+                    .HasName("PK__DetalleS__2C16EB8EB3E42A73");
 
                 entity.Property(e => e.DsaId).HasColumnName("dsa_Id");
 
@@ -196,9 +202,11 @@
             modelBuilder.Entity<Modulo>(entity =>
             {
                 entity.HasKey(e => e.ModId)
-                    .HasName("PK__Modulo__656687D6C02B49AD");
+                    .HasName("PK__Modulo__656687D66B5BF8AE");
 
-                entity.Property(e => e.ModId).HasColumnName("mod_Id");
+                entity.Property(e => e.ModId)
+                    .HasColumnName("mod_Id")
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.ModDescripcion)
                     .IsRequired()
@@ -207,10 +215,10 @@
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<ModuloObjetoAccíon>(entity =>
+            modelBuilder.Entity<ModuloObjetoAccion>(entity =>
             {
                 entity.HasKey(e => e.MoaId)
-                    .HasName("PK__ModuloOb__7A0B8760B4291EF1");
+                    .HasName("PK__ModuloOb__7A0B8760BAFB12E7");
 
                 entity.Property(e => e.MoaId).HasColumnName("moa_Id");
 
@@ -221,19 +229,19 @@
                 entity.Property(e => e.MoaObjId).HasColumnName("moa_obj_Id");
 
                 entity.HasOne(d => d.MoaAcc)
-                    .WithMany(p => p.ModuloObjetoAccíon)
+                    .WithMany(p => p.ModuloObjetoAccion)
                     .HasForeignKey(d => d.MoaAccId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__ModuloObj__moa_a__440B1D61");
 
                 entity.HasOne(d => d.MoaMod)
-                    .WithMany(p => p.ModuloObjetoAccíon)
+                    .WithMany(p => p.ModuloObjetoAccion)
                     .HasForeignKey(d => d.MoaModId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__ModuloObj__moa_m__4222D4EF");
 
                 entity.HasOne(d => d.MoaObj)
-                    .WithMany(p => p.ModuloObjetoAccíon)
+                    .WithMany(p => p.ModuloObjetoAccion)
                     .HasForeignKey(d => d.MoaObjId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__ModuloObj__moa_o__4316F928");
@@ -242,7 +250,7 @@
             modelBuilder.Entity<Objeto>(entity =>
             {
                 entity.HasKey(e => e.ObjId)
-                    .HasName("PK__Objeto__9FA39FEB35B6DDB5");
+                    .HasName("PK__Objeto__9FA39FEB74086041");
 
                 entity.Property(e => e.ObjId).HasColumnName("obj_Id");
 
@@ -256,9 +264,11 @@
             modelBuilder.Entity<Producto>(entity =>
             {
                 entity.HasKey(e => e.PduId)
-                    .HasName("PK__Producto__0622590E277A4444");
+                    .HasName("PK__Producto__0622590EB7C6B9FA");
 
-                entity.Property(e => e.PduId).HasColumnName("pdu_Id");
+                entity.Property(e => e.PduId)
+                    .HasColumnName("pdu_Id")
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.PduDescripcion)
                     .IsRequired()
@@ -270,9 +280,11 @@
             modelBuilder.Entity<Servicio>(entity =>
             {
                 entity.HasKey(e => e.SerId)
-                    .HasName("PK__Servicio__62860C33D0E0A52E");
+                    .HasName("PK__Servicio__62860C33605F5E5C");
 
-                entity.Property(e => e.SerId).HasColumnName("ser_Id");
+                entity.Property(e => e.SerId)
+                    .HasColumnName("ser_Id")
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.SerDescripcion)
                     .IsRequired()
@@ -286,7 +298,7 @@
             modelBuilder.Entity<SolicitudServicio>(entity =>
             {
                 entity.HasKey(e => e.SolId)
-                    .HasName("PK__Solicitu__9A7B3583345C7286");
+                    .HasName("PK__Solicitu__9A7B3583E6582980");
 
                 entity.Property(e => e.SolId).HasColumnName("sol_Id");
 
@@ -328,9 +340,11 @@
             modelBuilder.Entity<Usuario>(entity =>
             {
                 entity.HasKey(e => e.UsuId)
-                    .HasName("PK__Usuario__43056304C42AEC70");
+                    .HasName("PK__Usuario__43056304D4C85D8E");
 
-                entity.Property(e => e.UsuId).HasColumnName("usu_Id");
+                entity.Property(e => e.UsuId)
+                    .HasColumnName("usu_Id")
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.UsuCuit)
                     .IsRequired()
@@ -376,7 +390,9 @@
 
                 entity.Property(e => e.UsuPass)
                     .IsRequired()
-                    .HasColumnName("usu_Pass");
+                    .HasColumnName("usu_Pass")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.UsuRol)
                     .IsRequired()
@@ -388,7 +404,7 @@
             modelBuilder.Entity<UsuarioActividad>(entity =>
             {
                 entity.HasKey(e => new { e.UsaUsuCodigo, e.UsaActId })
-                    .HasName("PK__UsuarioA__CCB82F920255F5A3");
+                    .HasName("PK__UsuarioA__CCB82F92B815508B");
 
                 entity.Property(e => e.UsaUsuCodigo).HasColumnName("usa_usu_Codigo");
 
